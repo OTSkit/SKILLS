@@ -1,0 +1,13 @@
+interface:
+  display_name: "OTSkit Preserve"
+  short_description: "Create preservation ZIPs with OTS proofs"
+  default_prompt: "Use $otskit-preserve-codex to preserve this file or folder with a BagIt ZIP and OpenTimestamps proof."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "otskit"
+      description: "OTSkit MCP tools for stamping files, creating timestamps, and verifying stamp records."
+
+policy:
+  allow_implicit_invocation: true
