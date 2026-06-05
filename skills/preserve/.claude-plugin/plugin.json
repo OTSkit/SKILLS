@@ -1,0 +1,8 @@
+{
+  "name": "preserve",
+  "version": "1.0.0",
+  "description": "Creates BagIt-compliant preservation packages anchored on Bitcoin via OpenTimestamps",
+  "author": {
+    "name": "OTSkit"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "otskit-skills",
+  "owner": {
+    "name": "OTSkit"
+  },
+  "plugins": [
+    {
+      "name": "preserve",
+      "source": "./skills/preserve",
+      "description": "Digital preservation packages anchored on Bitcoin via OpenTimestamps. Skills for Claude Code and Codex."
+    }
+  ]
+}
