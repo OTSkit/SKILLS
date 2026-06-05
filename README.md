@@ -13,8 +13,8 @@
 
 | Skill | Agent | Description |
 |---|---|---|
-| [otskit-preserve](skills/otskit-preserve/) | Claude Code | Creates BagIt-compliant preservation packages and anchors them to Bitcoin |
-| [otskit-preserve-codex](skills/otskit-preserve-codex/) | Codex | Same workflow adapted for Codex, with PowerShell helper scripts |
+| [preserve / claude](skills/preserve/claude/) | Claude Code | Creates BagIt-compliant preservation packages and anchors them to Bitcoin |
+| [preserve / codex](skills/preserve/codex/) | Codex | Same workflow adapted for Codex, with PowerShell helper scripts |
 
 ## Requirements
 
