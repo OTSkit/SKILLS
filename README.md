@@ -1,29 +1,35 @@
-![preserve — a set of skills that stamp and anchor data to the Bitcoin blockchain](banner.png)
+![preserve — stamp and anchor data to the Bitcoin blockchain](banner.png)
 
 # OTSkit Skills
 
-> Agent skills for digital preservation anchored on the Bitcoin blockchain via OpenTimestamps.
+> Immutable. Verifiable. Forever. — Agent skills for digital preservation anchored on the Bitcoin blockchain via OpenTimestamps.
 
 ![BagIt RFC 8493](https://img.shields.io/badge/BagIt-RFC%208493-0066cc?style=flat-square)
 ![OAIS ISO 14721](https://img.shields.io/badge/OAIS-ISO%2014721-0066cc?style=flat-square)
 ![PREMIS 3.0](https://img.shields.io/badge/PREMIS-3.0-0066cc?style=flat-square)
 ![OpenTimestamps](https://img.shields.io/badge/anchored-Bitcoin-f7931a?style=flat-square&logo=bitcoin&logoColor=white)
+![Claude Code](https://img.shields.io/badge/Claude%20Code-supported-8A2BE2?style=flat-square)
+![Codex](https://img.shields.io/badge/Codex-supported-10a37f?style=flat-square)
+
+---
+
+## What is this?
+
+OTSkit Skills lets your AI agent **preserve any file or folder** as a standards-compliant archive and **anchor its hash to the Bitcoin blockchain** — creating a tamper-evident, cryptographically verifiable proof of existence that requires no trusted third party.
+
+Say *"preserve this"* or *"stamp this folder"* and the agent handles the rest.
 
 ---
 
 ## Skills
 
-| Skill | Agent | Description |
+| Skill | Agents | Description |
 |---|---|---|
-| [preserve / claude](skills/preserve/claude/) | Claude Code | Creates BagIt-compliant preservation packages and anchors them to Bitcoin |
-| [preserve / codex](skills/preserve/codex/) | Codex | Same workflow adapted for Codex, with PowerShell helper scripts |
+| [preserve](skills/preserve/) | Claude Code · Codex | BagIt preservation packages anchored to Bitcoin via OpenTimestamps |
 
-## Requirements
+---
 
-- `@otskit/mcp` MCP server configured in your agent
-- PowerShell (Windows) or bash (Linux/macOS)
-
-## What these skills produce
+## What it produces
 
 Every preservation run delivers four portable, self-contained files:
 
@@ -31,8 +37,32 @@ Every preservation run delivers four portable, self-contained files:
 |---|---|
 | `.zip` | BagIt package — payload + fixity manifests + PREMIS metadata |
 | `.sha256` | SHA-256 of the ZIP (what was submitted to Bitcoin) |
-| `.ots` | OpenTimestamps proof file (portable, verifiable offline) |
-| `.stamp-id.txt` | OTSkit stamp UUID for MCP lookups |
+| `.ots` | OpenTimestamps proof file — portable, verifiable offline forever |
+| `.stamp-id.txt` | OTSkit stamp UUID for MCP lookups and upgrades |
+
+---
+
+## How to install
+
+Add this marketplace to Claude Code:
+
+```shell
+/plugin marketplace add OTSkit/SKILLS
+/plugin install preserve@otskit-skills
+```
+
+Then trigger the skill with natural language:
+
+> *"preserve this"* · *"stamp this folder"* · *"archive this document"* · *"create a preservation package"*
+
+---
+
+## Requirements
+
+- `@otskit/mcp` MCP server configured in your agent
+- PowerShell (Windows) or bash (Linux/macOS)
+
+---
 
 ## Standards
 
