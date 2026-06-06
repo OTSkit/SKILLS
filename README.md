@@ -25,7 +25,7 @@ Say *"preserve this"* or *"stamp this folder"* and the agent handles the rest.
 
 | Skill | Agents | Description |
 |---|---|---|
-| [preserve](skills/preserve/) | Claude Code · Codex | BagIt preservation packages anchored to Bitcoin via OpenTimestamps |
+| [preserve](preserve/) | Claude Code · Codex | BagIt preservation packages anchored to Bitcoin via OpenTimestamps |
 
 ---
 

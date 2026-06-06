@@ -6,7 +6,7 @@
   "plugins": [
     {
       "name": "preserve",
-      "source": "./skills/preserve",
+      "source": "./preserve",
       "description": "Digital preservation packages anchored on Bitcoin via OpenTimestamps. Skills for Claude Code and Codex."
     }
   ]
