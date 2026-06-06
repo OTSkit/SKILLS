@@ -1,7 +1,7 @@
 interface:
   display_name: "OTSkit Preserve"
   short_description: "Create preservation ZIPs with OTS proofs"
-  default_prompt: "Use $otskit-preserve-codex to preserve this file or folder with a BagIt ZIP and OpenTimestamps proof."
+  default_prompt: "Use $preserve to preserve this file or folder with a BagIt ZIP and OpenTimestamps proof."
 
 dependencies:
   tools:
