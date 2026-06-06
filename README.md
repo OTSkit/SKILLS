@@ -79,8 +79,3 @@ Then trigger the skill with natural language:
 | PREMIS 3.0 | Event and agent provenance |
 | OpenTimestamps | Bitcoin blockchain anchoring |
 
----
-
-## Roadmap
-
-- **OpenClaw skills** — coming soon
