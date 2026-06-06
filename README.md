@@ -44,7 +44,13 @@ Every preservation run delivers four portable, self-contained files:
 
 ## How to install
 
-Add this marketplace to Claude Code:
+**Via Smithery:**
+
+```shell
+npx -y skills add https://smithery.ai/skills/otskit/preserve
+```
+
+**Via Claude Code plugin marketplace:**
 
 ```shell
 /plugin marketplace add OTSkit/SKILLS
