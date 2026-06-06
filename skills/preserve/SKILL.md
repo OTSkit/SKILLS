@@ -11,6 +11,22 @@ Use careful language: this creates a Bitcoin/OpenTimestamps proof of existence. 
 
 Read `preservation-standards.md` only when the user asks about BagIt, OAIS, PREMIS, evidentiary wording, legal standing, or the design rationale.
 
+## User Communication
+
+Keep the user informed throughout. Before starting, confirm what you are about to do:
+
+> "I'll preserve `<source>` — creating a BagIt archive and anchoring its hash to Bitcoin. This takes a few steps."
+
+Announce each major phase as you enter it:
+
+- **Building the package** — assembling files, computing hashes, writing metadata
+- **Sealing the ZIP** — compressing the staging directory
+- **Stamping on Bitcoin** — submitting the hash to OpenTimestamps calendars
+- **Writing sidecars** — saving the proof, hash, and stamp ID beside the ZIP
+- **Done** — confirm the four files are in place
+
+If anything fails or takes longer than expected, tell the user what is happening and why.
+
 ## Preferred Automation
 
 On Windows, prefer OTSkit MCP hashing when available, then use the bundled scripts. Resolve script paths relative to this skill directory:
@@ -267,8 +283,17 @@ Preservation package created:
   Stamp ID:   <UUID>
   OTS proof:  preserved-<name>-<date>.ots
   Status:     pending Bitcoin confirmation (~1–2 hours)
-
-To check confirmation later:
-  Tool: upgrade_timestamp  →  { "id": "<UUID>" }
-  Tool: verify_timestamp   →  { "id": "<UUID>" }
 ```
+
+Then explain what each file is for, in plain language:
+
+- **`.zip`** — the preservation package itself: contains all your original files plus the fixity manifests and provenance metadata. This is the object that was stamped.
+- **`.sha256`** — the fingerprint of the ZIP (SHA-256 hash). This is the exact value submitted to Bitcoin. Anyone can verify the ZIP hasn't been altered by recomputing this hash.
+- **`.ots`** — the OpenTimestamps proof file. Portable and self-contained: it can be verified offline against the Bitcoin blockchain at any point in the future, without relying on OTSkit or any third party.
+- **`.stamp-id.txt`** — the OTSkit internal reference. Use it to check confirmation status, upgrade the proof once Bitcoin confirms, or look up the record later.
+
+Close with:
+
+> "Keep all four files together. The `.ots` proof only makes sense alongside the `.zip` it refers to."
+
+Also say that confirmation can be checked later with `upgrade_timestamp` or `verify_timestamp` using the stamp ID.
