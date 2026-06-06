@@ -1,5 +1,3 @@
-![preserve — a set of skills that stamp and anchor data to the Bitcoin blockchain](banner.png)
-
 # OTSkit Skills
 
 > Agent skills for digital preservation anchored on the Bitcoin blockchain via OpenTimestamps.
