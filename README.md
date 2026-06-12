@@ -53,7 +53,7 @@ npx -y skills add https://smithery.ai/skills/otskit/preserve
 **Via Claude Code plugin marketplace:**
 
 ```shell
-/plugin marketplace add OTSkit/SKILLS
+/plugin marketplace add OTSkit/OTSkit-skills
 /plugin install preserve@otskit-skills
 ```
 
