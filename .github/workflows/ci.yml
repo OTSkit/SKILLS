@@ -11,6 +11,10 @@ jobs:
     name: Validate marketplace and skills
     runs-on: ubuntu-latest
     steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
       - uses: actions/checkout@v4
 
       - name: Validate marketplace.json and plugin structure
