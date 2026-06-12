@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Validate marketplace and skills
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate marketplace.json and plugin structure
+        run: |
+          node - <<'EOF'
+          const fs = require('fs');
+          const path = require('path');
+
+          const fail = (msg) => { console.error(`FAIL: ${msg}`); process.exitCode = 1; };
+
+          const marketplace = JSON.parse(fs.readFileSync('.claude-plugin/marketplace.json', 'utf8'));
+          if (!marketplace.name) fail('marketplace.json: missing "name"');
+          if (!marketplace.owner?.name) fail('marketplace.json: missing "owner.name"');
+          if (!Array.isArray(marketplace.plugins) || marketplace.plugins.length === 0)
+            fail('marketplace.json: "plugins" must be a non-empty array');
+
+          for (const plugin of marketplace.plugins ?? []) {
+            const dir = plugin.source;
+            if (!plugin.name) { fail('plugin entry missing "name"'); continue; }
+            if (!plugin.description) fail(`plugin "${plugin.name}": missing "description"`);
+            if (!dir || !fs.existsSync(dir)) { fail(`plugin "${plugin.name}": source dir "${dir}" not found`); continue; }
+
+            const pluginJson = path.join(dir, '.claude-plugin', 'plugin.json');
+            if (!fs.existsSync(pluginJson)) fail(`plugin "${plugin.name}": missing ${pluginJson}`);
+            else JSON.parse(fs.readFileSync(pluginJson, 'utf8'));
+
+            const skillMd = path.join(dir, 'SKILL.md');
+            if (!fs.existsSync(skillMd)) { fail(`plugin "${plugin.name}": missing ${skillMd}`); continue; }
+            const content = fs.readFileSync(skillMd, 'utf8');
+            const fm = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+            if (!fm) { fail(`${skillMd}: missing YAML frontmatter`); continue; }
+            if (!/^name:\s*\S+/m.test(fm[1])) fail(`${skillMd}: frontmatter missing "name"`);
+            if (!/^description:\s*\S+/m.test(fm[1])) fail(`${skillMd}: frontmatter missing "description"`);
+          }
+
+          if (process.exitCode) process.exit(process.exitCode);
+          console.log('OK: marketplace and all skills are structurally valid');
+          EOF
+
+      - name: Lint PowerShell scripts
+        shell: pwsh
+        run: |
+          $errors = @()
+          Get-ChildItem -Recurse -Filter *.ps1 | ForEach-Object {
+            $tokens = $null; $parseErrors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile($_.FullName, [ref]$tokens, [ref]$parseErrors) | Out-Null
+            if ($parseErrors) { $errors += "$($_.FullName): $($parseErrors[0].Message)" }
+          }
+          if ($errors) { $errors | ForEach-Object { Write-Error $_ }; exit 1 }
+          Write-Host 'OK: all PowerShell scripts parse cleanly'
